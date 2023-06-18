@@ -117,7 +117,7 @@
     <Folder Include="types\utils\logging\" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="src\mod.ts" />
+    <TypeScriptCompile Include="src\batterySystem.ts" />
     <TypeScriptCompile Include="types\callbacks\BotCallbacks.d.ts" />
     <TypeScriptCompile Include="types\callbacks\BundleCallbacks.d.ts" />
     <TypeScriptCompile Include="types\callbacks\CustomizationCallbacks.d.ts" />

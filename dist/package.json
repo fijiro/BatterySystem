@@ -1,10 +1,10 @@
 {
-  "name": "LogToConsole",
+  "name": "BatterySystem",
   "version": "1.0.0",
-  "main": "src/mod.js",
+  "main": "src/batterySystem.js",
   "license": "MIT",
-  "author": "Chomp",
-  "akiVersion": "~3.5",
+  "author": "Jiro",
+  "akiVersion": "3.5.*",
   "scripts": {
     "setup": "npm i",
     "build": "node ./packageBuild.ts"
