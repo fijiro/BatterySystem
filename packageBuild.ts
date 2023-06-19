@@ -31,7 +31,7 @@ const ignoreList = [
     "src/**/*.js",
     "types/",
     ".git/",
-    ".gitea/",
+    ".git*",
     ".eslintignore",
     ".eslintrc.json",
     ".gitignore",
