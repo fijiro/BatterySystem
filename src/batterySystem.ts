@@ -86,7 +86,7 @@ class Mod implements IPostDBLoadMod {
         //add hideout crafts for batteries
         hideoutProduction.push(
             {
-                // Induction!
+                // craft triple a battery
                 "_id": "aaa-battery0",
                 "areaType": 10,
                 "requirements": [
@@ -96,14 +96,14 @@ class Mod implements IPostDBLoadMod {
                         "type": "Area"
                     },
                     {
-                        "templateId": "5d1b36a186f7742523398433", //aa battery
+                        "templateId": "5672cb124bdc2d1a0f8b4568", //aa battery
                         "count": 3,
                         "isFunctional": false,
                         "isEncoded": false,
                         "type": "Item"
                     }
                 ],
-                "productionTime": 7200, // seconds
+                "productionTime": 3600, // seconds
                 "needFuelForAllProductionTime": false,
                 "locked": false,
                 "endProduct": "aaa-battery",
@@ -233,13 +233,6 @@ class Mod implements IPostDBLoadMod {
                 "productionLimitCount": 0,
                 "isEncoded": false
             },
-        );
-
-        //add aaa-battery barter to prapor
-        traders["54cb50c76803fa8b248b4571"].assort.items.push({
-            _id: "aaa-battery-assort",
-            _tpl: "aaa-battery"
-        }
         );
     }
 }
