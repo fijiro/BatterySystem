@@ -1,1 +1,1 @@
-BatterySystem. Now NVGs / Thermals consume batteries. Wow, such realism!
+BatterySystem. Now NVGs / Thermals use batteries. Wow, such realism!

@@ -10,7 +10,7 @@
     "build": "node ./packageBuild.ts"
   },
   "devDependencies": {
-    "@types/node": "^16.18.10",
+    "@types/node": "^16.18.37",
     "@typescript-eslint/eslint-plugin": "5.46.1",
     "@typescript-eslint/parser": "5.46.1",
     "bestzip": "2.2.1",
