@@ -15,6 +15,7 @@ class Mod implements IPostDBLoadMod {
         const CustomItem = container.resolve<CustomItemService>("CustomItemService");
         const items = db.getTables().templates.items;
         const hideoutProduction = db.getTables().hideout.production;
+        const traders = db.getTables().traders;
 
         const AAABattery: NewItemFromCloneDetails = {
             itemTplToClone: "5d1b36a186f7742523398433", //aa battery
@@ -83,47 +84,76 @@ class Mod implements IPostDBLoadMod {
             }
         }
         //add hideout crafts for batteries
-        hideoutProduction.push({ // Induction!
-            "_id": "aaa-battery1",
-            "areaType": 2,
-            "requirements": [
-                {
-                    "areaType": 2, //Lavatory = 2, WorkBench = 10
-                    "requiredLevel": 1,
-                    "type": "Area"
-                },
-                {
-                    "templateId": "590a391c86f774385a33c404", //magnet
-                    "count": 1,
-                    "isFunctional": false,
-                    "isEncoded": false,
-                    "type": "Tool"
-                },
-                {
-                    "templateId": "5c06779c86f77426e00dd782", //Bundle of wires
-                    "count": 1,
-                    "isFunctional": false,
-                    "isEncoded": false,
-                    "type": "Item"
-                },
-                {
-                    "templateId": "aaa-battery",
-                    "count": 1,
-                    "isFunctional": false,
-                    "isEncoded": false,
-                    "type": "Item"
-                }
-            ],
-            "productionTime": 7200, // seconds
-            "needFuelForAllProductionTime": false,
-            "locked": false,
-            "endProduct": "aaa-battery",
-            "continuous": false,
-            "count": 1,
-            "productionLimitCount": 0,
-            "isEncoded": false
-        },
-        { // Car Battery!
+        hideoutProduction.push(
+            {
+                // Induction!
+                "_id": "aaa-battery0",
+                "areaType": 10,
+                "requirements": [
+                    {
+                        "areaType": 10, //Lavatory = 2, WorkBench = 10
+                        "requiredLevel": 1,
+                        "type": "Area"
+                    },
+                    {
+                        "templateId": "5d1b36a186f7742523398433", //aa battery
+                        "count": 3,
+                        "isFunctional": false,
+                        "isEncoded": false,
+                        "type": "Item"
+                    }
+                ],
+                "productionTime": 7200, // seconds
+                "needFuelForAllProductionTime": false,
+                "locked": false,
+                "endProduct": "aaa-battery",
+                "continuous": false,
+                "count": 1,
+                "productionLimitCount": 0,
+                "isEncoded": false
+            },
+            {
+                // Induction!
+                "_id": "aaa-battery1",
+                "areaType": 2,
+                "requirements": [
+                    {
+                        "areaType": 2, //Lavatory = 2, WorkBench = 10
+                        "requiredLevel": 1,
+                        "type": "Area"
+                    },
+                    {
+                        "templateId": "590a391c86f774385a33c404", //magnet
+                        "count": 1,
+                        "isFunctional": false,
+                        "isEncoded": false,
+                        "type": "Tool"
+                    },
+                    {
+                        "templateId": "5c06779c86f77426e00dd782", //Bundle of wires
+                        "count": 1,
+                        "isFunctional": false,
+                        "isEncoded": false,
+                        "type": "Item"
+                    },
+                    {
+                        "templateId": "aaa-battery",
+                        "count": 1,
+                        "isFunctional": false,
+                        "isEncoded": false,
+                        "type": "Item"
+                    }
+                ],
+                "productionTime": 3600, // seconds
+                "needFuelForAllProductionTime": false,
+                "locked": false,
+                "endProduct": "aaa-battery",
+                "continuous": false,
+                "count": 1,
+                "productionLimitCount": 0,
+                "isEncoded": false
+            },
+            { // Car Battery!
                 "_id": "aaa-battery2",
                 "areaType": 2,
                 "requirements": [
@@ -164,48 +194,53 @@ class Mod implements IPostDBLoadMod {
                 "isEncoded": false
             },
             { // Normal charging :(
-            "_id": "aaa-battery3",
-            "areaType": 10,
-            "requirements": [
-                {
-                    "areaType": 10,
-                    "requiredLevel": 3,
-                    "type": "Area"
-                },
-                {
-                    "templateId": "5909e99886f7740c983b9984", //USB Adapter
-                    "count": 1,
-                    "isFunctional": false,
-                    "isEncoded": false,
-                    "type": "Tool"
-                },
-                {
-                    "templateId": "5c06779c86f77426e00dd782", //Bundle of wires
-                    "count": 1,
-                    "isFunctional": false,
-                    "isEncoded": false,
-                    "type": "Item"
-                },
-                {
-                    "templateId": "aaa-battery",
-                    "count": 3,
-                    "isFunctional": false,
-                    "isEncoded": false,
-                    "type": "Item"
-                }
-            ],
-            "productionTime": 600, // seconds
-            "needFuelForAllProductionTime": false,
-            "locked": false,
-            "endProduct": "aaa-battery",
-            "continuous": false,
-            "count": 3,
-            "productionLimitCount": 0,
-            "isEncoded": false
-        },
-
+                "_id": "aaa-battery3",
+                "areaType": 10,
+                "requirements": [
+                    {
+                        "areaType": 10,
+                        "requiredLevel": 3,
+                        "type": "Area"
+                    },
+                    {
+                        "templateId": "5909e99886f7740c983b9984", //USB Adapter
+                        "count": 1,
+                        "isFunctional": false,
+                        "isEncoded": false,
+                        "type": "Tool"
+                    },
+                    {
+                        "templateId": "5c06779c86f77426e00dd782", //Bundle of wires
+                        "count": 1,
+                        "isFunctional": false,
+                        "isEncoded": false,
+                        "type": "Item"
+                    },
+                    {
+                        "templateId": "aaa-battery",
+                        "count": 3,
+                        "isFunctional": false,
+                        "isEncoded": false,
+                        "type": "Item"
+                    }
+                ],
+                "productionTime": 600, // seconds
+                "needFuelForAllProductionTime": false,
+                "locked": false,
+                "endProduct": "aaa-battery",
+                "continuous": false,
+                "count": 3,
+                "productionLimitCount": 0,
+                "isEncoded": false
+            },
         );
 
+        //add aaa-battery barter to prapor
+        traders["54cb50c76803fa8b248b4571"].assort.items.push({
+            _id: "aaa-battery-assort",
+            _tpl: "aaa-battery"
+        }
+        );
     }
 }
 /*
