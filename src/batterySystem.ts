@@ -200,7 +200,7 @@ class Mod implements IPostDBLoadMod {
                         "type": "Item"
                     }
                 ],
-                "productionTime": 600, // seconds
+                "productionTime": 3600, // seconds
                 "needFuelForAllProductionTime": false,
                 "locked": false,
                 "endProduct": rchblBatteryID,
@@ -240,7 +240,7 @@ class Mod implements IPostDBLoadMod {
                         "type": "Item"
                     }
                 ],
-                "productionTime": 600, // seconds
+                "productionTime": 3600, // seconds
                 "needFuelForAllProductionTime": false,
                 "locked": false,
                 "endProduct": rchblBatteryID,
@@ -280,7 +280,7 @@ class Mod implements IPostDBLoadMod {
                         "type": "Item"
                     }
                 ],
-                "productionTime": 600, // seconds
+                "productionTime": 3600, // seconds
                 "needFuelForAllProductionTime": false,
                 "locked": false,
                 "endProduct": rchblBatteryID,
