@@ -5,6 +5,7 @@
   "license": "MIT",
   "author": "Jiro",
   "akiVersion": "3.5.*",
+  "isBundleMod": true,
   "scripts": {
     "setup": "npm i",
     "build": "node ./packageBuild.ts"

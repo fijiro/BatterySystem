@@ -32,12 +32,19 @@
     <Compile Include="config\config.json">
       <SubType>Code</SubType>
     </Compile>
+    <Content Include="bundles.json">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="bundles\batteries\cr123.bundle" />
+    <Content Include="bundles\batteries\cr2032.bundle" />
     <Content Include="package.json" />
     <Content Include="README.md" />
     <Content Include="tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="bundles\batteries\" />
     <Folder Include="config\" />
+    <Folder Include="bundles\" />
     <Folder Include="src\" />
   </ItemGroup>
   <ItemGroup>
