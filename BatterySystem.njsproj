@@ -29,13 +29,35 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="config\config.json">
+      <SubType>Code</SubType>
+    </Compile>
+    <Content Include="bundles.json">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="bundles\batteries\cr123.bundle" />
+    <Content Include="bundles\batteries\cr2032.bundle" />
     <Content Include="package.json" />
     <Content Include="README.md" />
     <Content Include="tsconfig.json" />
+    <Content Include="types\.vs\ProjectSettings.json" />
+    <Content Include="types\.vs\slnx.sqlite" />
+    <Content Include="types\.vs\types\FileContentIndex\4b9315e6-63c3-417b-852e-94fd4db159ee.vsidx" />
+    <Content Include="types\.vs\types\FileContentIndex\read.lock" />
+    <Content Include="types\.vs\types\v17\workspaceFileList.bin" />
+    <Content Include="types\.vs\VSWorkspaceState.json" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="bundles\batteries\" />
+    <Folder Include="config\" />
+    <Folder Include="bundles\" />
     <Folder Include="src\" />
     <Folder Include="types\" />
+    <Folder Include="types\.vs\" />
+    <Folder Include="types\.vs\types\" />
+    <Folder Include="types\.vs\types\FileContentIndex\" />
+    <Folder Include="types\.vs\types\FileContentIndex\merges\" />
+    <Folder Include="types\.vs\types\v17\" />
     <Folder Include="types\callbacks\" />
     <Folder Include="types\context\" />
     <Folder Include="types\controllers\" />
