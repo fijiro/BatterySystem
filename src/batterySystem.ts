@@ -22,8 +22,7 @@ class Mod implements IPostDBLoadMod {
         const aaBatteryID = "5672cb124bdc2d1a0f8b4568";
         const dBatteryID = "5672cb304bdc2dc2088b456a";
         const rchblBatteryID = "590a358486f77429692b2790";
-        const flirID = "5d1b5e94d7ad1a2b865a96b0";
-        const reapID = "5a1eaa87fcdbcb001865f75e";
+        //const flirID = "5d1b5e94d7ad1a2b865a96b0";
 
         items[aaBatteryID]._props.MaxResource = 100;
         items[aaBatteryID]._props.Resource = 100;
@@ -34,8 +33,8 @@ class Mod implements IPostDBLoadMod {
         items[dBatteryID]._props.Resource = 100;
         items[dBatteryID]._props.Prefab.path = "batteries/cr2032.bundle";
         //Flir has a built-in battery
-        items[flirID]._props.MaxResource = 100;
-        items[flirID]._props.Resource = 100;
+        //items[flirID]._props.MaxResource = 100;
+        //items[flirID]._props.Resource = 100;
 
 
         //Credit to Jehree! // 16 locales, wtf?
@@ -141,25 +140,6 @@ class Mod implements IPostDBLoadMod {
                     }
                 );
             }
-            /*_name: "mod_equipment", //change background image, only one mod_tactical can be used at once
-            _id: "slotid_" + i.toLowerCase(), // has to be unique?
-            _parent: i.toLowerCase(), // same as item
-            _props: {
-                filters: [
-                    {
-                        Shift: 0,
-                        Filter: [
-                            //this.batteryType
-                        ]
-                    }
-                ]
-            },
-            _required: false,
-            _mergeSlotWithChildren: false,
-            _proto: ""//items[i]._proto //physical position?
-        }*/
-
-            //enable batteries spawning on slots. the durability is adjusted in a patch.
             for (let bot in botDB) {
                 botDB[bot].inventory.mods[id] = {
                     "mod_equipment": [
@@ -167,205 +147,205 @@ class Mod implements IPostDBLoadMod {
                     ]
                 }
             }
-
-            //chances for spawning in with a battery, THIS CAUSES BOTS TO NOT SPAWN WITH AMMO IN SECURE CONTAINER???
-            // for (let bot in botDB) {
-            //     botDB[bot].chances.mods.mod_equipment = 100;
-            //}
-
-            //add hideout crafts for batteries
-            hideoutProduction.push(
-                {
-                    // craft triple a battery
-                    "_id": "cr2032Craft0",
-                    "areaType": 10,
-                    "requirements": [
-                        {
-                            "areaType": 10, //Lavatory = 2, WorkBench = 10
-                            "requiredLevel": 1,
-                            "type": "Area"
-                        },
-                        {
-                            "templateId": "544fb5454bdc2df8738b456a", //multiTool
-                            "count": 1,
-                            "isFunctional": false,
-                            "isEncoded": false,
-                            "type": "Tool"
-                        },
-                        {
-                            "templateId": aaBatteryID, //aa battery
-                            "count": 1,
-                            "isFunctional": false,
-                            "isEncoded": false,
-                            "type": "Item"
-                        }
-                    ],
-                    "productionTime": 3600, // seconds
-                    "needFuelForAllProductionTime": false,
-                    "locked": false,
-                    "endProduct": dBatteryID,
-                    "continuous": false,
-                    "count": 2,
-                    "productionLimitCount": 0,
-                    "isEncoded": false
-                },
-                {
-                    // Induction!
-                    "_id": "cr123Recharge0",
-                    "areaType": 2,
-                    "requirements": [
-                        {
-                            "areaType": 2, //Lavatory = 2, WorkBench = 10
-                            "requiredLevel": 1,
-                            "type": "Area"
-                        },
-                        {
-                            "templateId": "590a391c86f774385a33c404", //magnet
-                            "count": 1,
-                            "isFunctional": false,
-                            "isEncoded": false,
-                            "type": "Tool"
-                        },
-                        {
-                            "templateId": "5c06779c86f77426e00dd782", //Bundle of wires
-                            "count": 1,
-                            "isFunctional": false,
-                            "isEncoded": false,
-                            "type": "Item"
-                        },
-                        {
-                            "templateId": rchblBatteryID,
-                            "count": 1,
-                            "isFunctional": false,
-                            "isEncoded": false,
-                            "type": "Item"
-                        }
-                    ],
-                    "productionTime": 3600, // seconds
-                    "needFuelForAllProductionTime": false,
-                    "locked": false,
-                    "endProduct": rchblBatteryID,
-                    "continuous": false,
-                    "count": 1,
-                    "productionLimitCount": 0,
-                    "isEncoded": false
-                },
-                { // Car Battery!
-                    "_id": "cr123Recharge1",
-                    "areaType": 2,
-                    "requirements": [
-                        {
-                            "areaType": 2,
-                            "requiredLevel": 2,
-                            "type": "Area"
-                        },
-                        {
-                            "templateId": "5733279d245977289b77ec24", //Car battery
-                            "count": 1,
-                            "isFunctional": false,
-                            "isEncoded": false,
-                            "type": "Tool"
-                        },
-                        {
-                            "templateId": "5c06779c86f77426e00dd782", //Bundle of wires
-                            "count": 1,
-                            "isFunctional": false,
-                            "isEncoded": false,
-                            "type": "Item"
-                        },
-                        {
-                            "templateId": rchblBatteryID,
-                            "count": 2,
-                            "isFunctional": false,
-                            "isEncoded": false,
-                            "type": "Item"
-                        }
-                    ],
-                    "productionTime": 3600, // seconds
-                    "needFuelForAllProductionTime": false,
-                    "locked": false,
-                    "endProduct": rchblBatteryID,
-                    "continuous": false,
-                    "count": 2,
-                    "productionLimitCount": 0,
-                    "isEncoded": false
-                },
-                { // Normal charging :(
-                    "_id": "cr123Recharge2",
-                    "areaType": 10,
-                    "requirements": [
-                        {
-                            "areaType": 10,
-                            "requiredLevel": 3,
-                            "type": "Area"
-                        },
-                        {
-                            "templateId": "5909e99886f7740c983b9984", //USB Adapter
-                            "count": 1,
-                            "isFunctional": false,
-                            "isEncoded": false,
-                            "type": "Tool"
-                        },
-                        {
-                            "templateId": "5c06779c86f77426e00dd782", //Bundle of wires
-                            "count": 1,
-                            "isFunctional": false,
-                            "isEncoded": false,
-                            "type": "Item"
-                        },
-                        {
-                            "templateId": rchblBatteryID,
-                            "count": 3,
-                            "isFunctional": false,
-                            "isEncoded": false,
-                            "type": "Item"
-                        }
-                    ],
-                    "productionTime": 3600, // seconds
-                    "needFuelForAllProductionTime": false,
-                    "locked": false,
-                    "endProduct": rchblBatteryID,
-                    "continuous": false,
-                    "count": 3,
-                    "productionLimitCount": 0,
-                    "isEncoded": false
-                },
-                { // Normal charging FLIR :(
-                    "_id": "flirRecharge0",
-                    "areaType": 10,
-                    "requirements": [
-                        {
-                            "areaType": 10,
-                            "requiredLevel": 3,
-                            "type": "Area"
-                        },
-                        {
-                            "templateId": "5909e99886f7740c983b9984", //USB Adapter
-                            "count": 1,
-                            "isFunctional": false,
-                            "isEncoded": false,
-                            "type": "Tool"
-                        },
-                        {
-                            "templateId": flirID,
-                            "count": 1,
-                            "isFunctional": false,
-                            "isEncoded": false,
-                            "type": "Item"
-                        }
-                    ],
-                    "productionTime": 600, // seconds
-                    "needFuelForAllProductionTime": false,
-                    "locked": false,
-                    "endProduct": flirID,
-                    "continuous": false,
-                    "count": 1,
-                    "productionLimitCount": 0,
-                    "isEncoded": false
-                },
-            );
-            logger.success("BatterySystem has been applied!");
         }
+        //enable batteries spawning on slots. the durability is adjusted in a patch.
+        //chances for spawning in with a battery, THIS CAUSES BOTS TO NOT SPAWN WITH AMMO IN SECURE CONTAINER???
+        for (let bot in botDB) {
+            botDB[bot].chances.mods.mod_equipment = 20;
+        }
+
+        //add hideout crafts for batteries
+        hideoutProduction.push(
+            {
+                // craft triple a battery
+                "_id": "cr2032Craft0",
+                "areaType": 10,
+                "requirements": [
+                    {
+                        "areaType": 10, //Lavatory = 2, WorkBench = 10
+                        "requiredLevel": 1,
+                        "type": "Area"
+                    },
+                    {
+                        "templateId": "544fb5454bdc2df8738b456a", //multiTool
+                        "count": 1,
+                        "isFunctional": false,
+                        "isEncoded": false,
+                        "type": "Tool"
+                    },
+                    {
+                        "templateId": aaBatteryID, //aa battery
+                        "count": 1,
+                        "isFunctional": false,
+                        "isEncoded": false,
+                        "type": "Item"
+                    }
+                ],
+                "productionTime": 3600, // seconds
+                "needFuelForAllProductionTime": false,
+                "locked": false,
+                "endProduct": dBatteryID,
+                "continuous": false,
+                "count": 2,
+                "productionLimitCount": 0,
+                "isEncoded": false
+            },
+            {
+                // Induction!
+                "_id": "cr123Recharge0",
+                "areaType": 2,
+                "requirements": [
+                    {
+                        "areaType": 2, //Lavatory = 2, WorkBench = 10
+                        "requiredLevel": 1,
+                        "type": "Area"
+                    },
+                    {
+                        "templateId": "590a391c86f774385a33c404", //magnet
+                        "count": 1,
+                        "isFunctional": false,
+                        "isEncoded": false,
+                        "type": "Tool"
+                    },
+                    {
+                        "templateId": "5c06779c86f77426e00dd782", //Bundle of wires
+                        "count": 1,
+                        "isFunctional": false,
+                        "isEncoded": false,
+                        "type": "Item"
+                    },
+                    {
+                        "templateId": rchblBatteryID,
+                        "count": 1,
+                        "isFunctional": false,
+                        "isEncoded": false,
+                        "type": "Item"
+                    }
+                ],
+                "productionTime": 3600, // seconds
+                "needFuelForAllProductionTime": false,
+                "locked": false,
+                "endProduct": rchblBatteryID,
+                "continuous": false,
+                "count": 1,
+                "productionLimitCount": 0,
+                "isEncoded": false
+            },
+            { // Car Battery!
+                "_id": "cr123Recharge1",
+                "areaType": 2,
+                "requirements": [
+                    {
+                        "areaType": 2,
+                        "requiredLevel": 2,
+                        "type": "Area"
+                    },
+                    {
+                        "templateId": "5733279d245977289b77ec24", //Car battery
+                        "count": 1,
+                        "isFunctional": false,
+                        "isEncoded": false,
+                        "type": "Tool"
+                    },
+                    {
+                        "templateId": "5c06779c86f77426e00dd782", //Bundle of wires
+                        "count": 1,
+                        "isFunctional": false,
+                        "isEncoded": false,
+                        "type": "Item"
+                    },
+                    {
+                        "templateId": rchblBatteryID,
+                        "count": 2,
+                        "isFunctional": false,
+                        "isEncoded": false,
+                        "type": "Item"
+                    }
+                ],
+                "productionTime": 3600, // seconds
+                "needFuelForAllProductionTime": false,
+                "locked": false,
+                "endProduct": rchblBatteryID,
+                "continuous": false,
+                "count": 2,
+                "productionLimitCount": 0,
+                "isEncoded": false
+            },
+            { // Normal charging :(
+                "_id": "cr123Recharge2",
+                "areaType": 10,
+                "requirements": [
+                    {
+                        "areaType": 10,
+                        "requiredLevel": 3,
+                        "type": "Area"
+                    },
+                    {
+                        "templateId": "5909e99886f7740c983b9984", //USB Adapter
+                        "count": 1,
+                        "isFunctional": false,
+                        "isEncoded": false,
+                        "type": "Tool"
+                    },
+                    {
+                        "templateId": "5c06779c86f77426e00dd782", //Bundle of wires
+                        "count": 1,
+                        "isFunctional": false,
+                        "isEncoded": false,
+                        "type": "Item"
+                    },
+                    {
+                        "templateId": rchblBatteryID,
+                        "count": 3,
+                        "isFunctional": false,
+                        "isEncoded": false,
+                        "type": "Item"
+                    }
+                ],
+                "productionTime": 3600, // seconds
+                "needFuelForAllProductionTime": false,
+                "locked": false,
+                "endProduct": rchblBatteryID,
+                "continuous": false,
+                "count": 3,
+                "productionLimitCount": 0,
+                "isEncoded": false
+            }/*,
+            { // Normal charging FLIR :(
+                "_id": "flirRecharge0",
+                "areaType": 10,
+                "requirements": [
+                    {
+                        "areaType": 10,
+                        "requiredLevel": 3,
+                        "type": "Area"
+                    },
+                    {
+                        "templateId": "5909e99886f7740c983b9984", //USB Adapter
+                        "count": 1,
+                        "isFunctional": false,
+                        "isEncoded": false,
+                        "type": "Tool"
+                    },
+                    {
+                        "templateId": flirID,
+                        "count": 1,
+                        "isFunctional": false,
+                        "isEncoded": false,
+                        "type": "Item"
+                    }
+                ],
+                "productionTime": 600, // seconds
+                "needFuelForAllProductionTime": false,
+                "locked": false,
+                "endProduct": flirID,
+                "continuous": false,
+                "count": 1,
+                "productionLimitCount": 0,
+                "isEncoded": false
+            },*/
+        );
+        logger.success("BatterySystem has been applied!");
     }
 }
 
