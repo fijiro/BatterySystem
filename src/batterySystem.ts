@@ -120,7 +120,6 @@ class Mod implements IPostDBLoadMod {
                 //logger.info("Adding slot to: " + items[id]._name);
                 items[id]._props.Slots.push(
                     {
-
                         "_name": "mod_equipment",
                         "_id": "id_" + id.toLowerCase(),
                         "_parent": "parent_" + id.toLowerCase(),
@@ -151,8 +150,8 @@ class Mod implements IPostDBLoadMod {
         //enable batteries spawning on slots. the durability is adjusted in a patch.
         //chances for spawning in with a battery, THIS CAUSES BOTS TO NOT SPAWN WITH AMMO IN SECURE CONTAINER???
         for (let bot in botDB) {
-             botDB[bot].chances.mods.mod_equipment = 100;
-         }
+             botDB[bot].chances.mods.mod_equipment = 30;
+        }
 
         //add hideout crafts for batteries
         hideoutProduction.push(
