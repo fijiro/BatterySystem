@@ -22,6 +22,7 @@ class Mod implements IPostDBLoadMod {
         const aaBatteryID = "5672cb124bdc2d1a0f8b4568";
         const dBatteryID = "5672cb304bdc2dc2088b456a";
         const rchblBatteryID = "590a358486f77429692b2790";
+        const carBatteryID = "5733279d245977289b77ec24";
         //const flirID = "5d1b5e94d7ad1a2b865a96b0";
 
         items[aaBatteryID]._props.MaxResource = 100;
@@ -32,6 +33,10 @@ class Mod implements IPostDBLoadMod {
         items[dBatteryID]._props.MaxResource = 100;
         items[dBatteryID]._props.Resource = 100;
         items[dBatteryID]._props.Prefab.path = "batteries/cr2032.bundle";
+        items[carBatteryID]._props.MaxResource = 100;
+        items[carBatteryID]._props.Resource = 100;
+
+        
         //Flir has a built-in battery
         //items[flirID]._props.MaxResource = 100;
         //items[flirID]._props.Resource = 100;
@@ -93,8 +98,10 @@ class Mod implements IPostDBLoadMod {
         for (let id in items) {  //check that item isn't NightVision or ThermalVision and requires a battery, and is either NVG/Thermal sight, NVG/Thermal goggles or T-7.
             if ((id != BaseClasses.NIGHTVISION && id != "5d21f59b6dbe99052b54ef83"
                 && !config.NoBattery.includes(id)
-                && (items[id]._parent == BaseClasses.SPECIAL_SCOPE || items[id]._parent == BaseClasses.NIGHTVISION || items[id]._parent == "5d21f59b6dbe99052b54ef83")) // headwear
-                || (items[id]._parent == BaseClasses.COLLIMATOR || items[id]._parent == BaseClasses.COMPACT_COLLIMATOR)) { // sight
+                && (items[id]._parent == BaseClasses.SPECIAL_SCOPE) //flir
+                || (items[id]._parent == BaseClasses.NIGHTVISION || items[id]._parent == "5d21f59b6dbe99052b54ef83")) // headwear
+                || (items[id]._parent == BaseClasses.COLLIMATOR || items[id]._parent == BaseClasses.COMPACT_COLLIMATOR) //sight
+                || (items[id]._parent == "5645bcb74bdc2ded0b8b4578")) { //earpiece
 
                 if (config.AA.includes(id))
                     this.batteryType = aaBatteryID; //AA Battery stays AA Battery              
@@ -168,7 +175,7 @@ class Mod implements IPostDBLoadMod {
                     {
                         "templateId": "544fb5454bdc2df8738b456a", //multiTool
                         "count": 1,
-                        "isFunctional": false,
+                        "isFunctional": false, 
                         "isEncoded": false,
                         "type": "Tool"
                     },
@@ -230,6 +237,33 @@ class Mod implements IPostDBLoadMod {
                 "productionLimitCount": 0,
                 "isEncoded": false
             },
+            { // Car Battery Recharge Test
+                "_id": "carBatteryTest1",
+                "areaType": 2,
+                "requirements": [
+                    {
+                        "areaType": 2,
+                        "requiredLevel": 2,
+                        "type": "Area"
+                    },
+                    {
+                        "templateId": carBatteryID, //Car battery
+                        "count": 1,
+                        "isFunctional": false,
+                        "resource": 110,
+                        "isEncoded": false,
+                        "type": "Tool"
+                    }
+                ],
+                "productionTime": 10, // seconds
+                "needFuelForAllProductionTime": false,
+                "locked": false,
+                "endProduct": carBatteryID,
+                "continuous": false,
+                "count": 1,
+                "productionLimitCount": 0,
+                "isEncoded": false
+            },
             { // Car Battery!
                 "_id": "cr123Recharge1",
                 "areaType": 2,
@@ -243,6 +277,7 @@ class Mod implements IPostDBLoadMod {
                         "templateId": "5733279d245977289b77ec24", //Car battery
                         "count": 1,
                         "isFunctional": false,
+                        "resource": 100,
                         "isEncoded": false,
                         "type": "Tool"
                     },
