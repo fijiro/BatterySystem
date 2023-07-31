@@ -41,7 +41,6 @@ class Mod implements IPostDBLoadMod {
         //items[flirID]._props.MaxResource = 100;
         //items[flirID]._props.Resource = 100;
 
-
         //Credit to Jehree! // 16 locales, wtf?
         for (const locale of locales) {
             locale[`${rchblBatteryID} Name`] = "CR123 Rechargeable Battery";
@@ -85,6 +84,7 @@ class Mod implements IPostDBLoadMod {
         }
         CustomItem.createItemFromClone(AAABattery); //Basically calls the function and tell the server to add our Cloned new item into the server
         */
+
         // huge thanks and credit to jbs4mx! https://github.com/jbs4bmx/SpecialSlots/
         const pockets = items["627a4e6b255f7527fb05a0f6"];
         pockets._props.Slots[0]._props.filters[0].Filter.push(dBatteryID, rchblBatteryID, aaBatteryID);
@@ -95,7 +95,7 @@ class Mod implements IPostDBLoadMod {
         items["5d235bb686f77443f4331278"]._props.Grids[0]._props.filters[0].Filter.push(dBatteryID, rchblBatteryID, aaBatteryID);
 
         //add battery slots to wanted items
-        for (let id in items) {  //check that item isn't NightVision or ThermalVision and requires a battery, and is either NVG/Thermal sight, NVG/Thermal goggles or T-7.
+        for (let id in items) { 
             if ((id != BaseClasses.NIGHTVISION && id != "5d21f59b6dbe99052b54ef83"
                 && !config.NoBattery.includes(id)
                 && (items[id]._parent == BaseClasses.SPECIAL_SCOPE) //flir
@@ -121,9 +121,6 @@ class Mod implements IPostDBLoadMod {
                     const newDescription = "Uses " + locale[`${this.batteryType} Name`] + "\n\n" + locale[`${id} Description`];
                     locale[`${id} Description`] = newDescription;
                 }
-                //create new slot for battery, reap-ir eye scope mount?
-                // HERE IS WHERE IT SHITS ITSELF
-                // currently only applies to eotech 553
                 //logger.info("Adding slot to: " + items[id]._name);
                 items[id]._props.Slots.push(
                     {
@@ -154,16 +151,14 @@ class Mod implements IPostDBLoadMod {
                 }
             }
         }
-        //enable batteries spawning on slots. the durability is adjusted in a patch.
-        //chances for spawning in with a battery, THIS CAUSES BOTS TO NOT SPAWN WITH AMMO IN SECURE CONTAINER???
+        //change spawn% for batteries on bots. the durability is adjusted in a patch.
         for (let bot in botDB) {
-             botDB[bot].chances.mods.mod_equipment = 30;
+             botDB[bot].chances.mods.mod_equipment = 35;
         }
 
         //add hideout crafts for batteries
         hideoutProduction.push(
             {
-                // craft triple a battery
                 "_id": "cr2032Craft0",
                 "areaType": 10,
                 "requirements": [
@@ -187,7 +182,7 @@ class Mod implements IPostDBLoadMod {
                         "type": "Item"
                     }
                 ],
-                "productionTime": 3600, // seconds
+                "productionTime": 600, // seconds
                 "needFuelForAllProductionTime": false,
                 "locked": false,
                 "endProduct": dBatteryID,
@@ -228,7 +223,7 @@ class Mod implements IPostDBLoadMod {
                         "type": "Item"
                     }
                 ],
-                "productionTime": 3600, // seconds
+                "productionTime": 600, // seconds
                 "needFuelForAllProductionTime": false,
                 "locked": false,
                 "endProduct": rchblBatteryID,
@@ -237,7 +232,7 @@ class Mod implements IPostDBLoadMod {
                 "productionLimitCount": 0,
                 "isEncoded": false
             },
-            { // Car Battery Recharge Test
+            /*{ // Car Battery Recharge Test
                 "_id": "carBatteryTest1",
                 "areaType": 2,
                 "requirements": [
@@ -263,7 +258,7 @@ class Mod implements IPostDBLoadMod {
                 "count": 1,
                 "productionLimitCount": 0,
                 "isEncoded": false
-            },
+            },*/
             { // Car Battery!
                 "_id": "cr123Recharge1",
                 "areaType": 2,
@@ -296,7 +291,7 @@ class Mod implements IPostDBLoadMod {
                         "type": "Item"
                     }
                 ],
-                "productionTime": 3600, // seconds
+                "productionTime": 600, // seconds
                 "needFuelForAllProductionTime": false,
                 "locked": false,
                 "endProduct": rchblBatteryID,
@@ -336,7 +331,7 @@ class Mod implements IPostDBLoadMod {
                         "type": "Item"
                     }
                 ],
-                "productionTime": 3600, // seconds
+                "productionTime": 600, // seconds
                 "needFuelForAllProductionTime": false,
                 "locked": false,
                 "endProduct": rchblBatteryID,
