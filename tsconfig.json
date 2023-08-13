@@ -11,9 +11,6 @@
     "resolveJsonModule": true,
     "outDir": "tmp",
     "baseUrl": ".",
-    "types": [
-      "node"
-    ],
     "paths": {
       "@spt-aki/*": [ "./types/*" ]
     }

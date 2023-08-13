@@ -7,6 +7,7 @@ import { IPostDBLoadMod } from "@spt-aki/models/external/IPostDBLoadMod";
 import { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
 import { BaseClasses } from "@spt-aki/models/enums/BaseClasses"
 import * as config from "../config/config.json";
+import { basename } from "path";
 
 class Mod implements IPostDBLoadMod {
     private batteryType = "";
@@ -95,13 +96,15 @@ class Mod implements IPostDBLoadMod {
         items["5d235bb686f77443f4331278"]._props.Grids[0]._props.filters[0].Filter.push(dBatteryID, rchblBatteryID, aaBatteryID);
 
         //add battery slots to wanted items
-        for (let id in items) { 
-            if ((id != BaseClasses.NIGHTVISION && id != "5d21f59b6dbe99052b54ef83"
+        for (let id in items) {
+            if (id != BaseClasses.NIGHTVISION && id != BaseClasses.THERMAL_VISION
                 && !config.NoBattery.includes(id)
-                && (items[id]._parent == BaseClasses.SPECIAL_SCOPE) //flir
-                || (items[id]._parent == BaseClasses.NIGHTVISION || items[id]._parent == "5d21f59b6dbe99052b54ef83")) // headwear
-                || (items[id]._parent == BaseClasses.COLLIMATOR || items[id]._parent == BaseClasses.COMPACT_COLLIMATOR) //sight
-                || (items[id]._parent == "5645bcb74bdc2ded0b8b4578")) { //earpiece
+                && ((items[id]._parent == BaseClasses.SPECIAL_SCOPE) //flir
+                    || (items[id]._parent == BaseClasses.NIGHTVISION || items[id]._parent == BaseClasses.THERMAL_VISION)) // headwear
+                    || (items[id]._parent == BaseClasses.COLLIMATOR || items[id]._parent == BaseClasses.COMPACT_COLLIMATOR) //sight
+                    || (items[id]._parent == BaseClasses.HEADPHONES) //earpiece
+                    || (items[id]._parent == BaseClasses.FLASHLIGHT || items[id]._parent == BaseClasses.LIGHT_LASER_DESIGNATOR
+                        || items[id]._parent == BaseClasses.TACTICAL_COMBO)) {
 
                 if (config.AA.includes(id))
                     this.batteryType = aaBatteryID; //AA Battery stays AA Battery              
@@ -157,6 +160,7 @@ class Mod implements IPostDBLoadMod {
         }
 
         //add hideout crafts for batteries
+        
         hideoutProduction.push(
             {
                 "_id": "cr2032Craft0",
