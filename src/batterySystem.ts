@@ -52,40 +52,6 @@ class Mod implements IPostDBLoadMod {
             locale[`${dBatteryID} Description`] = "A singular CR2032 Battery. These are commonly used in military and hunting sights.";
         };
 
-        /*const AAABattery: NewItemFromCloneDetails = {
-            itemTplToClone: "5672cb124bdc2d1a0f8b4568", //aa battery
-            overrideProperties: {
-                MaxResource: 100,
-                Resource: 100,
-                InsuranceDisabled: true,
-                Prefab: {
-                    path: "batteries/cr2032.bundle",
-                    rcid: ""
-                },
-                Unlootable: true,
-                UnlootableFromSlot: "SpecialSlot",
-                UnlootableFromSide: [
-                    "Bear",
-                    "Usec",
-                    "Savage"
-                ]
-            }, //Overrided properties basically tell the server on what data inside _props to be modified from the cloned item
-            parentId: "57864ee62459775490116fc1", //ParentId refers to the Node item it will be under, you can check it in https://db.sp-tarkov.com/search
-            newId: "aaa-battery",
-            fleaPriceRoubles: 43250,
-            handbookPriceRoubles: 31420,
-            handbookParentId: "5b47574386f77428ca22b2ed", //Handbook parent can be found in Aki_Data\Server\database\templates.
-            locales: {
-                "en": {
-                    name: "AAA Battery",
-                    shortName: "AAA Battery",
-                    description: "A standard AAA battery. Used in a wide variety of electronics, such as night-vision devices, flashlights and laser pointers."
-                }
-            }
-        }
-        CustomItem.createItemFromClone(AAABattery); //Basically calls the function and tell the server to add our Cloned new item into the server
-        */
-
         // huge thanks and credit to jbs4mx! https://github.com/jbs4bmx/SpecialSlots/
         const pockets = items["627a4e6b255f7527fb05a0f6"];
         pockets._props.Slots[0]._props.filters[0].Filter.push(dBatteryID, rchblBatteryID, aaBatteryID);
@@ -104,20 +70,20 @@ class Mod implements IPostDBLoadMod {
                     || (items[id]._parent == BaseClasses.COLLIMATOR || items[id]._parent == BaseClasses.COMPACT_COLLIMATOR) //sight
                     || (items[id]._parent == BaseClasses.HEADPHONES) //earpiece
                     || (items[id]._parent == BaseClasses.FLASHLIGHT || items[id]._parent == BaseClasses.LIGHT_LASER_DESIGNATOR
-                        || items[id]._parent == BaseClasses.TACTICAL_COMBO)) {
+                        || items[id]._parent == BaseClasses.TACTICAL_COMBO)) { //tactical device
 
                 if (config.AA.includes(id))
-                    this.batteryType = aaBatteryID; //AA Battery stays AA Battery              
+                    this.batteryType = aaBatteryID;     //AA Battery stays AA Battery              
                 else if (config.CR123.includes(id))
-                    this.batteryType = rchblBatteryID; //CR123, for now rchbl battery
+                    this.batteryType = rchblBatteryID;  //CR123, for now rchbl battery
                 else if (config.CR2032.includes(id))
-                    this.batteryType = dBatteryID; //CR2032, for now d battery
+                    this.batteryType = dBatteryID;      //CR2032, for now d battery
                 else if (config.CR1225.includes(id))
                     this.batteryType = dBatteryID;
                 else if (config.CR1632.includes(id))
                     this.batteryType = dBatteryID;
                 else {
-                    logger.warning("BatterySystem: Item " + id + " has no defined battery, defaulting to CR2032!");
+                    //logger.warning("BatterySystem: Item " + id + " has no defined battery, defaulting to CR2032!");
                     this.batteryType = dBatteryID;
                 }
                 for (const locale of locales) { // Item description now includes the battery type
@@ -156,7 +122,7 @@ class Mod implements IPostDBLoadMod {
         }
         //change spawn% for batteries on bots. the durability is adjusted in a patch.
         for (let bot in botDB) {
-             botDB[bot].chances.mods.mod_equipment = 35;
+             botDB[bot].chances.mods.mod_equipment = 50;
         }
 
         //add hideout crafts for batteries
