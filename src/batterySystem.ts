@@ -8,6 +8,7 @@ import { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
 import { BaseClasses } from "@spt-aki/models/enums/BaseClasses"
 import * as config from "../config/config.json";
 import { basename } from "path";
+import { TraderPurchaseData } from "../types/models/eft/profile/IAkiProfile";
 
 class Mod implements IPostDBLoadMod {
     private batteryType = "";
@@ -37,7 +38,7 @@ class Mod implements IPostDBLoadMod {
         items[carBatteryID]._props.MaxResource = 100;
         items[carBatteryID]._props.Resource = 100;
 
-        
+
         //Flir has a built-in battery
         //items[flirID]._props.MaxResource = 100;
         //items[flirID]._props.Resource = 100;
@@ -67,10 +68,10 @@ class Mod implements IPostDBLoadMod {
                 && !config.NoBattery.includes(id)
                 && ((items[id]._parent == BaseClasses.SPECIAL_SCOPE) //flir
                     || (items[id]._parent == BaseClasses.NIGHTVISION || items[id]._parent == BaseClasses.THERMAL_VISION)) // headwear
-                    || (items[id]._parent == BaseClasses.COLLIMATOR || items[id]._parent == BaseClasses.COMPACT_COLLIMATOR) //sight
-                    || (items[id]._parent == BaseClasses.HEADPHONES) //earpiece
-                    || (items[id]._parent == BaseClasses.FLASHLIGHT || items[id]._parent == BaseClasses.LIGHT_LASER_DESIGNATOR
-                        || items[id]._parent == BaseClasses.TACTICAL_COMBO)) { //tactical device
+                || (items[id]._parent == BaseClasses.COLLIMATOR || items[id]._parent == BaseClasses.COMPACT_COLLIMATOR) //sight
+                || (items[id]._parent == BaseClasses.HEADPHONES) //earpiece
+                || (items[id]._parent == BaseClasses.FLASHLIGHT || items[id]._parent == BaseClasses.LIGHT_LASER_DESIGNATOR
+                    || items[id]._parent == BaseClasses.TACTICAL_COMBO)) { //tactical device
 
                 if (config.AA.includes(id))
                     this.batteryType = aaBatteryID;     //AA Battery stays AA Battery              
@@ -122,11 +123,32 @@ class Mod implements IPostDBLoadMod {
         }
         //change spawn% for batteries on bots. the durability is adjusted in a patch.
         for (let bot in botDB) {
-             botDB[bot].chances.mods.mod_equipment = 50;
+            botDB[bot].chances.mods.mod_equipment = 50;
         }
+        //Jäger
+        db.getTables().traders["5c0647fdd443bc2504c2d371"].assort.items.push({
+            "_id": "cr2032barter1",
+            "_tpl": dBatteryID,
+            "parentId": "hideout",
+            "slotId": "hideout",
+            "upd": {
+                "StackObjectsCount": 14993,
+                "BuyRestrictionMax": 4,
+                "BuyRestrictionCurrent": 0
+            }
+        })
+        db.getTables().traders["5c0647fdd443bc2504c2d371"].assort.barter_scheme["cr2032barter1"] =
+            [
+                [
+                    {
+                        "count": 3,
+                        "_tpl": dBatteryID
+                    }
+                ]
+            ];
+        db.getTables().traders["5c0647fdd443bc2504c2d371"].assort.loyal_level_items["cr2032barter1"] = 1;
 
         //add hideout crafts for batteries
-        
         hideoutProduction.push(
             {
                 "_id": "cr2032Craft0",
@@ -140,7 +162,7 @@ class Mod implements IPostDBLoadMod {
                     {
                         "templateId": "544fb5454bdc2df8738b456a", //multiTool
                         "count": 1,
-                        "isFunctional": false, 
+                        "isFunctional": false,
                         "isEncoded": false,
                         "type": "Tool"
                     },
