@@ -125,7 +125,7 @@ class Mod implements IPostDBLoadMod {
         for (let bot in botDB) {
             botDB[bot].chances.mods.mod_equipment = 50;
         }
-        //Jäger
+        //Jaeger trade for cr2032
         db.getTables().traders["5c0647fdd443bc2504c2d371"].assort.items.push({
             "_id": "cr2032barter1",
             "_tpl": dBatteryID,
