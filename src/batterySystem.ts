@@ -25,7 +25,11 @@ class Mod implements IPostDBLoadMod {
         const dBatteryID = "5672cb304bdc2dc2088b456a";
         const rchblBatteryID = "590a358486f77429692b2790";
         const carBatteryID = "5733279d245977289b77ec24";
-        //const flirID = "5d1b5e94d7ad1a2b865a96b0";
+        const flirID = "5d1b5e94d7ad1a2b865a96b0";
+        //Flir has a built-in battery. the battery doesn't show anywhere so no point
+        items[flirID]._props.MaxResource = 100;
+        items[flirID]._props.Resource = 0.05;
+
 
         items[aaBatteryID]._props.MaxResource = 100;
         items[aaBatteryID]._props.Resource = 100;
@@ -39,9 +43,7 @@ class Mod implements IPostDBLoadMod {
         items[carBatteryID]._props.Resource = 100;
 
 
-        //Flir has a built-in battery
-        //items[flirID]._props.MaxResource = 100;
-        //items[flirID]._props.Resource = 100;
+
 
         //Credit to Jehree! // 16 locales, wtf?
         for (const locale of locales) {
