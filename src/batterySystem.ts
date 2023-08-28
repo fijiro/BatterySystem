@@ -27,8 +27,8 @@ class Mod implements IPostDBLoadMod {
         const carBatteryID = "5733279d245977289b77ec24";
         const flirID = "5d1b5e94d7ad1a2b865a96b0";
         //Flir has a built-in battery. the battery doesn't show anywhere so no point
-        items[flirID]._props.MaxResource = 100;
-        items[flirID]._props.Resource = 0.05;
+        //items[flirID]._props.MaxResource = 100;
+        //items[flirID]._props.Resource = 0.05;
 
 
         items[aaBatteryID]._props.MaxResource = 100;
